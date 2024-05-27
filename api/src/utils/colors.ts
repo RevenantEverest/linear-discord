@@ -1,11 +1,11 @@
 import * as common from './common.js';
 
-export const success: number =  0x00ff00;
-export const warning: number = 0xff9900;
-export const error: number = 0xff0000;
+export const success =  0x00ff00;
+export const warning = 0xff9900;
+export const error = 0xff0000;
 
-export const topgg: number = 0xff3366;
-export const banana: number = 0xffcc00;
+export const topgg = 0xff3366;
+export const banana = 0xffcc00;
 
 /**
  * Grabs a list of all variables exported by this file, and returns a random one
