@@ -6,7 +6,7 @@ function handleError(err: Error) {
     return process.exit(1);
 };
 
-async function waitForPostgres(AppDataSource: DataSource): Promise<void | Error> {
+async function waitForPostgres(AppDataSource: DataSource): Promise<void> {
     let retries = 5;
     while(retries) {
         try {
