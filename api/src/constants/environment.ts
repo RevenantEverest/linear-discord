@@ -19,3 +19,9 @@ export const DATABASE = Object.freeze({
     USERNAME: process.env.DB_USERNAME as string,
     PASSWORD: process.env.DB_PASSWORD as string
 });
+
+export const DISCORD = Object.freeze({
+    APP_ID: process.env.DISCORD_APP_ID as string,
+    PUBLIC_KEY: process.env.DISCORD_PUBLIC_KEY as string,
+    KEY: process.env.DISCORD_KEY as string
+});
