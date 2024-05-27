@@ -1,19 +1,17 @@
 import type { DataSourceOptions } from 'typeorm';
 
-import dotenv from 'dotenv';
 import * as Entities from '@@entities/index.js';
+import { ENV } from '@@constants/index.js';
 
-dotenv.config();
-
-const DB_PORT = parseInt(process.env.DB_PORT!, 10);
+const DB_PORT = Number(ENV.DATABASE.PORT);
 
 const dbConfig: DataSourceOptions = {
     type: "postgres",
-    host: process.env.DB_HOST!,
+    host: ENV.DATABASE.HOST,
     port: DB_PORT,
-    database: process.env.DB_NAME!,
-    username: process.env.DB_USERNAME!,
-    password: process.env.DB_PASSWORD!,
+    database: ENV.DATABASE.NAME,
+    username: ENV.DATABASE.USERNAME,
+    password: ENV.DATABASE.PASSWORD,
     synchronize: true,
     logging: false,
     entities: Entities,
