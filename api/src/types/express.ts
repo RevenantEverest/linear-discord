@@ -17,6 +17,9 @@ export interface Locals<T> {
     params: T
 };
 
-export type Request<T = unknown, D = unknown> = ExpressRequest<D, unknown, T>;
+export interface Request<T = unknown, D = unknown> extends ExpressRequest<D, unknown, T> {
+    rawBody?: Buffer;
+};
+
 export type Response<T extends keyof Locals<D> = "params", D = unknown> = ExpressResponse<unknown, Pick<Locals<D>, T>>
 export type NextFunction = ExpressNextFunction;
