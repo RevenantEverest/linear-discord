@@ -14,15 +14,15 @@ class User extends BaseEntity {
         id: number,
         email: string,
         password: string,
-        created_at: Date,
-        updated_at: Date
+        createdAt: Date,
+        updatedAt: Date
     ) {
         super();
         this.id = id;
         this.email = email;
         this.password = password;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     };
 
     @PrimaryGeneratedColumn("uuid")
@@ -35,10 +35,10 @@ class User extends BaseEntity {
     password: string;
 
     @CreateDateColumn()
-    created_at: Date;
+    createdAt: Date;
 
     @UpdateDateColumn()
-    updated_at: Date;
+    updatedAt: Date;
 };
 
 export default User;
