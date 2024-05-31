@@ -1,18 +1,30 @@
 import type { Application } from 'express';
+import type { Request } from '@@types/express';
 
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 
+import { linearRoutes } from '@@routes/index.js';
+
 function initializeApp(): Application {
     const app = express();
 
     app.use(morgan("dev"));
-    app.use(express.json());
+
+    /* https://developers.linear.app/docs/graphql/webhooks */
+    app.use(express.json({
+        verify: (req: Request, res, buf) => {
+            req.rawBody = buf;
+        }
+    }));
+
     app.use(express.urlencoded({ extended: false }));
     app.use(cors());
     app.set("trust proxy", true);
     app.set("trust proxy", "loopback");
+
+    app.use("/linear", linearRoutes);
 
     return app;
 };
