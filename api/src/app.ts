@@ -5,7 +5,7 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 
-import { linearRoutes } from '@@routes/index.js';
+import { authRoutes, linearRoutes } from '@@routes/index.js';
 
 function initializeApp(): Application {
     const app = express();
@@ -24,6 +24,7 @@ function initializeApp(): Application {
     app.set("trust proxy", true);
     app.set("trust proxy", "loopback");
 
+    app.use("/auth", authRoutes);
     app.use("/linear", linearRoutes);
 
     return app;
