@@ -22,7 +22,7 @@
             "syntax": "typescript",
             "decorators": true
         },
-        "target": "es2022"
+        "target": "esnext"
     },
     "module": {
         "type": "es6",
