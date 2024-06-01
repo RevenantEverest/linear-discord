@@ -1,4 +1,4 @@
-import Discord, { ClientOptions, Guild, Interaction, Message } from 'discord.js';
+import Discord, { ClientOptions, Guild, Interaction } from 'discord.js';
 
 import { discordEventsController } from './controllers/index.js';
 
@@ -7,14 +7,12 @@ const options: ClientOptions = {
         "Guilds", 
         "GuildMembers", 
         "GuildEmojisAndStickers",
-        "GuildMessages",
         "GuildMessageReactions",
     ]
 };
 const bot = new Discord.Client(options);
 
 bot.on("ready", async () => discordEventsController.onReady(bot));
-bot.on("messageCreate", async (message: Message) => discordEventsController.onMessageCreate(bot, message));
 bot.on("interactionCreate", async (interaction: Interaction) => discordEventsController.onInteractionCreate(bot, interaction));
 bot.on("error", async (err: Error) => discordEventsController.onError(bot, err));
 
