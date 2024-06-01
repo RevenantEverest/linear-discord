@@ -23,7 +23,7 @@ class BotGuild extends BaseEntity {
         this.updatedAt = updatedAt;
     };
 
-    @PrimaryGeneratedColumn("uuid")
+    @PrimaryGeneratedColumn()
     id: number;
 
     @Column({ type: "varchar", length: 20 })
