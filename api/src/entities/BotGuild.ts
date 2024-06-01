@@ -13,12 +13,14 @@ class BotGuild extends BaseEntity {
     constructor(
         id: number,
         guildId: string,
+        isRemoved: boolean,
         createdAt: Date,
         updatedAt: Date
     ) {
         super();
         this.id = id;
         this.guildId = guildId;
+        this.isRemoved = isRemoved;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     };
@@ -28,6 +30,9 @@ class BotGuild extends BaseEntity {
 
     @Column({ type: "varchar", length: 20 })
     guildId: string;
+
+    @Column({ type: "boolean", default: false })
+    isRemoved: boolean;
 
     @CreateDateColumn()
     createdAt: Date;
