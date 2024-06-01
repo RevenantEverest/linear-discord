@@ -23,5 +23,7 @@ export const DATABASE = Object.freeze({
 export const DISCORD = Object.freeze({
     APP_ID: process.env.DISCORD_APP_ID as string,
     PUBLIC_KEY: process.env.DISCORD_PUBLIC_KEY as string,
-    KEY: process.env.DISCORD_KEY as string
+    KEY: process.env.DISCORD_KEY as string,
+    CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET as string,
+    REDIRECT_URI: process.env.DISCORD_REDIRECT_URI as string
 });
