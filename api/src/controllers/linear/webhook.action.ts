@@ -56,7 +56,7 @@ async function webhook(req: Request<LinearPayload>, res: Response) {
     if(linear.isIssue(payload.data)) {
         switch(req.body.action) {
             case "create":
-                embed = issueCreate(embed, payload.data, payload.actor);
+                embed = issueCreate(embed, payload.data);
                 break;
             case "update":
                 embed = issueUpdate(embed, payload.data, payload.actor, payload.updatedFrom);
@@ -69,7 +69,6 @@ async function webhook(req: Request<LinearPayload>, res: Response) {
         }
     }
 
-    const guildId = "427883469092159490";
     const channelId = "427883469092159492";
 
     const channel = await bot.channels.fetch(channelId);

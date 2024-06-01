@@ -1,10 +1,9 @@
 import type { LinearIssue } from '@@types/linear/linearIssue.js';
-import type { LinearPayloadActor } from '@@types/linear/linearPayload.js';
 import type { EmbedBuilder } from 'discord.js';
 
 import { colors } from '@@utils/index.js';
 
-function issueCreate(embed: EmbedBuilder, issue: LinearIssue, actor: LinearPayloadActor): EmbedBuilder {
+function issueCreate(embed: EmbedBuilder, issue: LinearIssue): EmbedBuilder {
 
     embed
     .setColor(colors.linear)
