@@ -1,6 +1,6 @@
 <center>
 <a href='https://linear.firesidebot.com' target='_blank'>
-<img src="https://i.imgur.com/akjfvBJ.png" width="200" />
+<img src="https://i.imgur.com/0fiTreW.png" width="200" />
 </a>
 
 <h1>Linear Discord</h1>
@@ -44,8 +44,10 @@ TESTING_DB_NAME=OpenAnimeAPI_Testing
 TESTING_DB_PORT=5432
 
 DISCORD_APP_ID=[discord application id]
+DISCORD_CLIENT_SECRET=[discord oauth client secret]
 DISCORD_PUBLIC_KEY=[discord application public key]
 DISCORD_KEY=[discord application bot token]
+DISCORD_REDIRECT_URI=[redirect uri set in the discord app dashboard]
 ```
 
 ## Scripts
