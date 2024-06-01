@@ -1,8 +1,9 @@
 export interface AuthPayload {
     id: string,
+    email: string,
+    discordId: string,
     username: string,
-    discriminator: number,
-    discord_id: string,
+    displayName: string,
     avatar: string,
     token?: string
 };
