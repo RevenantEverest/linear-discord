@@ -2,7 +2,6 @@ import type { Request, Response } from '@@types/express.js';
 import type { LinearPayload } from '@@types/linear/linearPayload.js';
 
 import Discord from 'discord.js';
-import * as crypto from 'crypto';
 
 import bot from '@@root/discordBot.js';
 import { 
@@ -22,20 +21,17 @@ async function webhook(req: Request<LinearPayload>, res: Response) {
 
     // Verify Signature
     const WEBHOOK_SECRET = "lin_wh_Czs0ask03FbQfN124ZwkA1RHQdNQU42DDSvnMDcv4oUo";
-    const signature = crypto.createHmac("sha256", WEBHOOK_SECRET).update(req.rawBody).digest("hex");
-    if(signature !== req.headers['linear-signature']) {
+    const isVerified = linear.verifySignature(req.rawBody, WEBHOOK_SECRET, req.headers['linear-signature']);
+
+    if(!isVerified) {
         return res.sendStatus(400);
     }
 
     // Allow linear to terminate webhook post signature verification
-    res.sendStatus(200); 
-
-    console.log("Req Body => ", req.body);
+    res.sendStatus(200);
     
     const payload = req.body;
-    const webhookDate = dates.format(new Date(payload.webhookTimestamp), {
-        
-    });
+    const webhookDate = dates.format(new Date(payload.webhookTimestamp));
 
     /*
         Prevents updates for:
