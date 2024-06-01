@@ -11,28 +11,28 @@ import {
 class User extends BaseEntity {
 
     constructor(
-        id: number,
+        id: string,
         email: string,
-        password: string,
+        discordId: string,
         createdAt: Date,
         updatedAt: Date
     ) {
         super();
         this.id = id;
         this.email = email;
-        this.password = password;
+        this.discordId = discordId;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     };
 
     @PrimaryGeneratedColumn("uuid")
-    id: number;
+    id: string;
 
     @Column({ type: "varchar", length: 255 })
     email: string;
 
-    @Column({ type: "varchar", length: 255 })
-    password: string;
+    @Column({  type: "varchar", length: 20, unique: true })
+    discordId: string;
 
     @CreateDateColumn()
     createdAt: Date;
