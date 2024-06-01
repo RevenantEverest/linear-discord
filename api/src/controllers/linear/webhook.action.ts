@@ -4,6 +4,7 @@ import type { LinearPayload } from '@@types/linear/linearPayload.js';
 import Discord from 'discord.js';
 
 import bot from '@@root/discordBot.js';
+import { LinearWebhook } from '@@entities/index.js';
 import { 
     issueCreate, 
     issueRemove, 
@@ -11,17 +12,40 @@ import {
     issueUpdate
 } from './operations/index.js';
 
-import { linear, dates } from '@@utils/index.js';
+import { linear, dates, entities, errors } from '@@utils/index.js';
 
-async function webhook(req: Request<LinearPayload>, res: Response) {
+interface Params {
+    guildId: string,
+    channelId: string
+};
+
+async function webhook(req: Request<LinearPayload>, res: Response<"params", Params>) {
 
     if(!req.rawBody) {
         return res.sendStatus(400);
     }
 
+    const { guildId, channelId } = res.locals.params;
+
+    const [linearWebhook, err] = await entities.findOne<LinearWebhook>(LinearWebhook, {
+        where: {
+            guildId,
+            channelId
+        }
+    });
+
+    if(err || !linearWebhook) {
+        return errors.sendEntitiesResponse({
+            res,
+            err,
+            message: "Error finding Linear Webhook",
+            entity: linearWebhook,
+            missingEntityMessage: "Unable to find Linear Webhook"
+        });
+    }
+
     // Verify Signature
-    const WEBHOOK_SECRET = "lin_wh_Czs0ask03FbQfN124ZwkA1RHQdNQU42DDSvnMDcv4oUo";
-    const isVerified = linear.verifySignature(req.rawBody, WEBHOOK_SECRET, req.headers['linear-signature']);
+    const isVerified = linear.verifySignature(req.rawBody, linearWebhook.signatureSecret, req.headers['linear-signature']);
 
     if(!isVerified) {
         return res.sendStatus(400);
@@ -69,9 +93,7 @@ async function webhook(req: Request<LinearPayload>, res: Response) {
         }
     }
 
-    const channelId = "427883469092159492";
-
-    const channel = await bot.channels.fetch(channelId);
+    const channel = await bot.channels.fetch(linearWebhook.channelId);
 
     if(embed && channel && channel.isTextBased()) {
         return channel.send({ embeds: [embed] });
