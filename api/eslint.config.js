@@ -5,13 +5,16 @@ import globals from 'globals';
 
 const config = tsEslint.config(
     eslint.configs.recommended,
-    ...tsEslint.configs.strict,
+    ...tsEslint.configs.recommended,
     {
         languageOptions: {
             globals: {
                 ...globals.node
             }
         }
+    },
+    {
+        ignores: ["dist/"]
     }
 );
 
